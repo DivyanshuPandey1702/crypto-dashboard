@@ -1,13 +1,345 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --primary-light-color: #5d6bce;
+  --primary-lightest-3-color: #f5f7ff;
+  --primary-text-color: #24292e;
+  --secondary-text-color: #444d56;
+  --text-help-color: #6a737d;
+  --text-help-light-color: #959da5;
+  --gray-25-color: #fafbfc;
+  --text-feedback-success-color: #8bc34a;
+  --text-feedback-failure-color: #db4949;
+  --border-light-color: #e1e4e8;
+  --border-dark-color: #d1d5da;
+  --primary-font: "Inter", sans-serif;
+  --hover-transition: 0.5s;
+
+  --image-bg: #efefef; /* temp img bg, change later */
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Remove Text Hilighting */
+::-moz-selection {
+  /* Code for Firefox */
+  background: transparent;
+}
+
+::selection {
+  background: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--primary-font);
+}
+
+/* React Components */
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.Sidebar {
+  position: relative;
+  width: 20vw;
+  border: 1px solid var(--border-light-color);
+  border-radius: 4px 0px 0px 4px;
+  display: flex;
+  flex-direction: column;
+}
+
+.ListItem {
+  padding: 16px;
+  transition: var(--hover-transition);
+}
+.ListItem:hover {
+  background-color: var(--border-light-color);
+}
+.ListItem:active {
+  background-color: var(--primary-lightest-3-color);
+}
+
+.CryptoCard {
+  width: 301px;
+  height: 213px;
+  background: var(--gray-25-color);
+  border: 1px solid var(--border-light-color);
+  box-sizing: border-box;
+  border-radius: 4.5561px;
+  margin: 0 16px 16px 0;
+  transition: var(--hover-transition);
+}
+.CryptoCard:hover {
+  background-color: var(--border-light-color);
+}
+
+/* CSS Elements */
+
+.menu_btn {
+  display: none;
+}
+
+.crypto_logo {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+
+.success_color {
+  color: var(--text-feedback-success-color);
+}
+
+.failure_color {
+  color: var(--text-feedback-failure-color);
+}
+
+/* Sidebar */
+.sidebar_header {
+  padding: 16px;
+  width: 20vw;
+  color: var(--secondary-text-color);
+  transition: var(--hover-transition);
+  cursor: pointer;
+}
+
+.sidebar_header:hover {
+  color: var(--primary-light-color);
+}
+
+.sidebar_header:active {
+  color: var(--text-help-light-color);
+}
+
+.sidebar_search_box {
+  position: relative;
+  margin: 0 12px 16px 16px;
+  border: 1px solid var(--border-dark-color);
+  border-radius: 4px;
+}
+
+.sidebar_search_icon_wrapper {
+  position: absolute;
+  height: 100%;
+  padding-left: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar_search_icon {
+  color: var(--text-help-color);
+}
+
+.sidebar_search_input {
+  border: none;
+  font-size: 14px;
+  margin: 8px 12px 8px 48px;
+  color: var(--text-help-color);
+}
+.sidebar_search_input:focus {
+  outline: none;
+}
+
+.line {
+  border-top: 1px solid var(--border-light-color);
+  margin: 0 12px 0 16px;
+}
+
+.list_item_active {
+  background-color: var(--primary-lightest-3-color);
+  border-right: 2px solid var(--primary-light-color);
+}
+
+.ListItem > div {
+  position: relative;
+}
+
+.list_item_crypto_code {
+  color: var(--primary-text-color);
+  font-weight: 500;
+  padding-left: 36px;
+  padding-top: 2px;
+  margin: 0;
+}
+
+.list_item_crypto_name {
+  color: var(--text-help-color);
+  font-weight: 500;
+  padding-left: 36px;
+  margin: 0;
+  padding-top: 8px;
+}
+
+.sidebar_list {
+  overflow-y: scroll;
+  flex: 1;
+  padding-bottom: 16px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.sidebar_list::-webkit-scrollbar {
+  display: none;
+}
+
+/* Main */
+
+.main_header_wrapper {
+  position: relative;
+  padding: 16px 0 24px 24px;
+}
+
+.main_header_text {
+  color: var(--primary-text-color);
+  font-weight: 600;
+  padding-left: 36px;
+  padding-top: 2px;
+}
+
+.crypto_card_container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 8px 0 24px;
+}
+
+.crypto_card_header {
+  padding: 24px 0 13px 24px;
+  display: flex;
+  align-items: center;
+}
+
+.crypto_card_logo_wrapper {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crypto_card_logo {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+}
+
+.crypto_card_header_text {
+  padding-left: 13px;
+}
+
+.crypto_card_name {
+  color: var(--primary-text-color);
+  font-weight: 600;
+  margin: 0;
+}
+
+.crypto_card_code {
+  color: var(--secondary-text-color);
+  font-weight: 500;
+  margin: 0;
+  padding-top: 4px;
+}
+
+.crypto_card_info {
+  padding-left: 86px;
+}
+
+.crypto_card_increase {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.crypto_card_increase_rate {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.crypto_card_price_arrow_wrapper {
+  position: absolute;
+  padding-top: 2px;
+}
+
+.crypto_card_change {
+  color: var(--text-help-color);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  margin: 0;
+  padding-top: 4px;
+}
+
+.crypto_card_line {
+  border-top: 1px solid var(--border-light-color);
+  margin: 12px 24px 12px 0;
+}
+
+.crypto_card_line_ver {
+  border-left: 1px solid var(--border-light-color);
+  margin: 0 12px;
+  height: 32px;
+}
+
+.crypto_card_limit_wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.crypto_card_limit_price {
+  color: var(--primary-text-color);
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0;
+}
+
+.crypto_card_limit_text {
+  color: var(--text-help-color);
+  font-size: 12px;
+  margin: 0;
+  padding-top: 4px;
+}
+
+@media (max-width: 1200px) {
+  .Sidebar {
+    width: 30vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .Sidebar {
+    width: 100vw;
+  }
+
+  .sidebar_hide {
+    display: none;
+  }
+
+  .Main {
+    width: 100vw;
+  }
+
+  .main_hide {
+    display: none;
+  }
+
+  .menu_btn {
+    display: block;
+    position: fixed;
+    z-index: 2;
+    width: 24px;
+    height: 24px;
+    right: 24px;
+    top: 16px;
+    transition: var(--hover-transition);
+  }
+
+  .CryptoCard {
+    width: 100vw;
+  }
 }
